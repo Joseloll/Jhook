@@ -78,7 +78,7 @@ def spammer():
     session = {201,204,409}
     if r.status_code in session:
         print(Fore.YELLOW + f"Sent Message Sucessfully")
-    elif r.status_code == 409:
+    elif r.status_code == 429:
         print(Fore.MAGENTA + "You Are Being Rate Limited")
         time.sleep(5)
         (menu)
