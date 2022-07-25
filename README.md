@@ -8,5 +8,12 @@
 - Spams Discord Webhook
 - Open Source
 
+
+# To Do List
+- Added Proxy Base
+- Fix Bugs  
+- Make Cleaner Code
+
+
 # Contacts
 - https://discord.gg/logger
