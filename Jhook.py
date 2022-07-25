@@ -57,7 +57,7 @@ def checker():
         menu()
       
         
-(menu)
+
 
 def deleter():
     url = input('Enter Your Webhook You Wanna Delete:')
