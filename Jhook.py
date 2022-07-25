@@ -12,7 +12,7 @@ def main():
    menu()
 
 def menu():
-   choices = input(Fore.BLUE + """
+   choices = input(Fore.CYAN + """
    /$$$$$       /$$   /$$                     /$$            
    |__  $$      | $$  | $$                    | $$            
       | $$      | $$  | $$  /$$$$$$   /$$$$$$ | $$   /$$      
