@@ -92,6 +92,7 @@ def spammer():
       print(Fore.RED + f'Webhook Deleted')
       time.sleep(2)
       os.system('cls')
+      menu()
 
 spammed=1000    
 
