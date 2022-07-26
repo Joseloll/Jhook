@@ -12,8 +12,8 @@
 # To Do List
 - Fix Bugs  
 - Make Cleaner Code
-- Added More To Spammer
-- Added 1 more thing to deleter
+- Add More To Spammer
+- Add 1 Thing To Deleter
 
 
 # Contacts
