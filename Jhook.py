@@ -6,7 +6,7 @@ import time
 import threading
 import colorama
 from colorama import Fore
-os.system(f'cls & mode 85,20 & title Jhook! Version 1.0!')
+os.system(f'cls & mode 85,20 & title Jhook! Version 1.1!')
 
 def main():
    menu()
@@ -22,8 +22,8 @@ def menu():
 |  $$$$$$/      | $$  | $$|  $$$$$$/|  $$$$$$/| $$ \  $$      
  \______/       |__/  |__/ \______/  \______/ |__/  \__/                   
 
-                  Made By Jose  
-                                                                                                                         
+                  Made By Josè#0001  
+                                                                                                                        
 [1] Webhook Checker
 [2] Webhook Deleter
 [3] Webhook Spammer
@@ -50,23 +50,26 @@ def checker():
    if r.status_code == 200:
     print(Fore.GREEN + "Webhook Is Working")
     time.sleep(2)
+    os.system("cls")
     menu()
    else:
-        input(Fore.RED + 'Webhook Is Not Working.')
+        print(Fore.RED + 'Webhook Is Not Working.')
         time.sleep(2)
+        os.system("cls")
         menu()
       
-        
+     
 
 
 def deleter():
-    url = input('Enter Your Webhook You Wanna Delete:')
+    url = input("Enter Your Webhook URL To Delete:")
     requests.delete(url)
-    print(Fore.GREEN + "Webhook SucessFully Deleted") 
+    c = requests.get(url)
+    print(Fore.GREEN +  "Webhook SucessFully Deleted")
     time.sleep(2)
+    os.system("cls")
     menu()
-   
-
+      
 
   
 
@@ -79,13 +82,16 @@ def spammer():
     if r.status_code in session:
         print(Fore.YELLOW + f"Sent Message Sucessfully")
     elif r.status_code == 429:
-        print(Fore.MAGENTA + "You Are Being Rate Limited")
+        print(f"{Fore.MAGENTA}You Are Being Rate Limited ({r.json()['retry_after']}ms){Fore.RESET}")
+        time.sleep(r.json()["retry_after"] / 1000)
         time.sleep(5)
         (menu)
         for i in range(2):
             threading.Thread(target=spammer, args=(message,webhook,)).start
-           
-        menu()
+    else:
+      print(Fore.RED + f'Webhook Deleted')
+      time.sleep(2)
+      os.system('cls')
 
 spammed=1000    
 
