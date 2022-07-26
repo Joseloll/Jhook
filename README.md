@@ -10,9 +10,10 @@
 
 
 # To Do List
-- Added Proxy's To It
 - Fix Bugs  
 - Make Cleaner Code
+- Added More To Spammer
+- Added 1 more thing to deleter
 
 
 # Contacts
