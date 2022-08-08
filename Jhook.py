@@ -4,9 +4,10 @@ import requests
 import os
 import time
 import threading
+import webbrowser
 import colorama
 from colorama import Fore
-os.system(f'cls & mode 85,20 & title Jhook! Version 1.1!')
+os.system(f'cls & mode 85,20 & title Jhook! Version 1.2!')
 
 def main():
    menu()
@@ -24,24 +25,39 @@ def menu():
 
                   Made By Josè#0001  
                                                                                                                         
-[1] Webhook Checker
-[2] Webhook Deleter
-[3] Webhook Spammer
-[4] Exit
+[1] Download The Newest Version
+[2] Webhook Checker
+[3] Webhook Deleter
+[4] Webhook Sender
+[5] Webhook Spammer
+[6] Exit
 Enter Your Choice ↓
  """)
    if choices == "1":
-    checker()
+    update()
    elif choices == "2":
+        checker()
+   elif choices == "3":
         deleter()
-   elif choices =="3":
-        spammer()
    elif choices =="4":
+        sender()
+   elif choices =="5":
+        spammer()
+   elif choices =="6":
         sys.exit
    else:
          print("Enter The Right Option!")
          time.sleep(3)
          menu()
+
+
+
+def update():
+    print("This Will Just Install The Newest Update For Jhook")
+    url ="https://cdn.discordapp.com/attachments/996509828908318813/1001543793859891260/update.py"
+    webbrowser.open(url);
+    
+    
 
 def checker():
 
@@ -58,18 +74,42 @@ def checker():
         os.system("cls")
         menu()
       
-     
+def sender():
+    print("This Will Send A Message To The There Discord Webhook")
+    webhook = input('Enter Your Discord Webhook: ')
+    message = input('Enter Your Discord Message: ')
+    send = requests.post(webhook,json={'content': message})
+    r = requests.get(webhook)
+    if r.status_code == 200:
+        print(Fore.GREEN + "Message Sent Sucessfully")
+        time.sleep(2)
+        os.system('cls')
+        menu()
+    
+    else:
+        print(Fore.RED + "Message Failed To Send")
+        time.sleep(2)
+        os.system("cls")
+        menu()
 
 
-def deleter():
-    url = input("Enter Your Webhook URL To Delete:")
-    requests.delete(url)
-    c = requests.get(url)
-    print(Fore.GREEN +  "Webhook SucessFully Deleted")
+def deleter():  
+    url = input("Enter Your Webhook URL To Delete: ")
+    try:
+        c = requests.get(url)
+        if c.status_code == 404:
+            print(Fore.RED + "Webhook Fail To Delete")
+            time.sleep(2)
+            os.system('cls')
+            menu()
+        else:
+            requests.delete(url)
+            print(Fore.GREEN + "Webhook Sucessfully Deleted")
+    except:
+        print("Failed to delete webhook")
     time.sleep(2)
     os.system("cls")
     menu()
-      
 
   
 
