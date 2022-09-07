@@ -1,19 +1,17 @@
-import csv
 import sys
 import requests
 import os
 import time
-import threading
-import webbrowser
-import colorama
+from pystyle import Colors, Colorate , Write, Colors
 from colorama import Fore
-os.system(f'cls & mode 85,20 & title Jhook! Version 1.2!')
+from pyotp import TOTP
+os.system(f'cls & mode 85,20 & title Jhook! Version 1.3!')
 
 def main():
    menu()
 
 def menu():
-   choices = input(Fore.CYAN + """
+   choices = Write.Input("""
    /$$$$$       /$$   /$$                     /$$            
    |__  $$      | $$  | $$                    | $$            
       | $$      | $$  | $$  /$$$$$$   /$$$$$$ | $$   /$$      
@@ -23,27 +21,22 @@ def menu():
 |  $$$$$$/      | $$  | $$|  $$$$$$/|  $$$$$$/| $$ \  $$      
  \______/       |__/  |__/ \______/  \______/ |__/  \__/                   
 
-                  Made By Josè#0001  
-                                                                                                                        
-[1] Download The Newest Version
-[2] Webhook Checker
-[3] Webhook Deleter
-[4] Webhook Sender
-[5] Webhook Spammer
-[6] Exit
-Enter Your Choice ↓
- """)
+    Made By Josè#0001,                                                                                                                  
+[1] Webhook Checker
+[2] Webhook Sender/Deleter
+[3] Webhook Spammer
+[4] Api Spammer
+[5] Exit
+Enter A Option ->""",Colors.white_to_red, interval=0.0)
    if choices == "1":
-    update()
-   elif choices == "2":
-        checker()
-   elif choices == "3":
-        deleter()
-   elif choices =="4":
+    checker()
+   elif choices =="2":
         sender()
-   elif choices =="5":
+   elif choices =="3":
         spammer()
-   elif choices =="6":
+   elif choices == "4":
+    apis()
+   elif choices =="5":
         sys.exit
    else:
          print("Enter The Right Option!")
@@ -52,88 +45,85 @@ Enter Your Choice ↓
 
 
 
-def update():
-    print("This Will Just Install The Newest Update For Jhook")
-    url ="https://cdn.discordapp.com/attachments/996509828908318813/1001543793859891260/update.py"
-    webbrowser.open(url);
-    
-    
-
 def checker():
-
-   webhook= input("Enter Your Webhook Url:")
-   r = requests.get(webhook)
-   if r.status_code == 200:
-    print(Fore.GREEN + "Webhook Is Working")
-    time.sleep(2)
-    os.system("cls")
-    menu()
-   else:
-        print(Fore.RED + 'Webhook Is Not Working.')
-        time.sleep(2)
-        os.system("cls")
-        menu()
-      
-def sender():
-    print("This Will Send A Message To The There Discord Webhook")
-    webhook = input('Enter Your Discord Webhook: ')
-    message = input('Enter Your Discord Message: ')
-    send = requests.post(webhook,json={'content': message})
+    webhook = Write.Input("Enter Your Webhook Url:",Colors.white_to_red, interval=0.01)
     r = requests.get(webhook)
     if r.status_code == 200:
-        print(Fore.GREEN + "Message Sent Sucessfully")
-        time.sleep(2)
-        os.system('cls')
-        menu()
-    
+         Write.Print("Webhook Is Working",Colors.white_to_green, interval=0.01)
+         time.sleep(2)
+         os.system("cls")
+         menu()
     else:
-        print(Fore.RED + "Message Failed To Send")
-        time.sleep(2)
-        os.system("cls")
-        menu()
-
-
-def deleter():  
-    url = input("Enter Your Webhook URL To Delete: ")
-    try:
-        c = requests.get(url)
-        if c.status_code == 404:
-            print(Fore.RED + "Webhook Fail To Delete")
+       Write.Print("Webhook Is Not Working",Colors.white_to_green, interval=0.01)
+       time.sleep(2)
+       os.system("cls")
+       menu()
+      
+def sender():
+    webhook = Write.Input("Enter Your Webhook Url:",Colors.white_to_red, interval=0.01)
+    name =  Write.Input("Enter Username For Webhook Url:",Colors.white_to_red, interval=0.01)
+    avatar = Write.Input("Enter Avatar Url For Webhook Url:",Colors.white_to_red, interval=0.01)
+    message = Write.Input("Enter Your Message Here:",Colors.white_to_red, interval=0.01)
+    send = requests.post(webhook, json={"content" : message, "username": name, "avatar_url": avatar})
+    time.sleep(2)
+    r = requests.get(webhook)
+    if r.status_code == 404:
+            Write.Print(f"Webhook Fail To Delete And Failed To Send",Colors.white_to_blue, interval=0.01)
             time.sleep(2)
             os.system('cls')
             menu()
-        else:
-            requests.delete(url)
-            print(Fore.GREEN + "Webhook Sucessfully Deleted")
-    except:
-        print("Failed to delete webhook")
-    time.sleep(2)
-    os.system("cls")
-    menu()
+    else:
+        requests.delete(webhook)
+        Write.Print("Message Sent Sucessfully And Webhook Was Sucessfully Deleted",Colors.white_to_green, interval=0.01)
+        time.sleep(2)
+        os.system('cls')
+        menu()
 
-  
+def apis():
+     api = Write.Input("Enter Your Api Url:",Colors.white_to_red, interval=0.01)
+     pass32 = Write.Input("Enter The Apis Password:",Colors.white_to_red, interval=0.01)
+     name =  Write.Input("Enter Username:",Colors.white_to_red, interval=0.01)
+     avatar = Write.Input("Enter Avatar Url:",Colors.white_to_red, interval=0.01)
+     message = Write.Input("Enter Your Message Here:",Colors.white_to_red, interval=0.01)
+     amount = int(Write.Input("Enter The Amount Of Messages Here:",Colors.white_to_red, interval=0.01))
+     key = TOTP(pass32).now()
+     for i in range(amount):
+        r = requests.post(api,headers={"Authorization": key}, json={"content" : message, "username": name, "avatar_url": avatar})
+        session = {200,204}
+        if r.status_code in session:
+            Write.Print(f"Sent Message Sucessfully\n",Colors.white_to_green, interval=0.0)
+        elif r.status_code == 429:
+            print(f"{Fore.MAGENTA}You Are Being Rate Limited ({r.json()['retry_after']}ms){Fore.RESET}")
+            time.sleep(r.json()["retry_after"] / 1000)
+        else:
+            Write.Print(f'Api Dosent Exist',Colors.white_to_red, interval=0.01)
+            time.sleep(2)
+            os.system('cls')
+            menu()
+                
+
 
 def spammer():
-   webhook = input('Enter Your Webhook Url:')
-   message = input("Enter Your Message Here:")
-   while True:
-    r = requests.post(webhook, json={"content" : message})
-    session = {201,204,409}
+   webhook = Write.Input("Enter Your Webhook Url:",Colors.white_to_red, interval=0.01)
+   name =  Write.Input("Enter Username For Webhook Url:",Colors.white_to_red, interval=0.01)
+   avatar = Write.Input("Enter Avatar Url For Webhook Url:",Colors.white_to_red, interval=0.01)
+   message = Write.Input("Enter Your Message Here:",Colors.white_to_red, interval=0.01)
+   amount = int(Write.Input("Enter The Amount Of Messages Here:",Colors.white_to_red, interval=0.01))
+   for i in range(amount):
+    r = requests.post(webhook, json={"content" : message, "username": name, "avatar_url": avatar})
+    session = {200,204}
     if r.status_code in session:
-        print(Fore.YELLOW + f"Sent Message Sucessfully")
+        Write.Print(f"Sent Message Sucessfully\n",Colors.white_to_green, interval=0.0)
+        
     elif r.status_code == 429:
         print(f"{Fore.MAGENTA}You Are Being Rate Limited ({r.json()['retry_after']}ms){Fore.RESET}")
         time.sleep(r.json()["retry_after"] / 1000)
-        time.sleep(5)
-        (menu)
-        for i in range(2):
-            threading.Thread(target=spammer, args=(message,webhook,)).start
+
     else:
-      print(Fore.RED + f'Webhook Deleted')
+      Write.Print(f'Webhook Deleted',Colors.white_to_red, interval=0.01)
       time.sleep(2)
       os.system('cls')
       menu()
-
-spammed=1000    
+    
 
 main()
