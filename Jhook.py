@@ -21,11 +21,11 @@ def menu():
 |  $$$$$$/      | $$  | $$|  $$$$$$/|  $$$$$$/| $$ \  $$      
  \______/       |__/  |__/ \______/  \______/ |__/  \__/                   
 
-    Made By Josè#0001,                                                                                                                  
+    Made By Josè#0001,TheSoap1#9870                                                                                                                  
 [1] Webhook Checker
 [2] Webhook Sender/Deleter
 [3] Webhook Spammer
-[4] Api Spammer
+[4] Webhook Protector Spammer
 [5] Exit
 Enter A Option ->""",Colors.white_to_red, interval=0.0)
    if choices == "1":
