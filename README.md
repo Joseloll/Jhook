@@ -12,5 +12,3 @@ This is a multi discord webhook tool that can spams discord webhooks if they are
 - Sends A Message To The Discord Webhook
 - Discord Protected Api Spammer
 
-# Contacts
-- https://discord.gg/logger
