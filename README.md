@@ -1,5 +1,6 @@
 # Jhook Discord Tool [Rebranded]
-![image](https://user-images.githubusercontent.com/106576578/188973652-0efa69f5-fa7d-423d-8874-920ea1fc0f65.png)
+![image](https://user-images.githubusercontent.com/106576578/188975235-5643190e-e584-4581-9f40-e6ed3ccce01b.png)
+
 
 # About This Project
 This is a multi discord webhook tool that can spams discord webhooks if they are protected or not
@@ -11,4 +12,3 @@ This is a multi discord webhook tool that can spams discord webhooks if they are
 - Deletes Discord
 - Sends A Message To The Discord Webhook
 - Discord Protected Api Spammer
-
