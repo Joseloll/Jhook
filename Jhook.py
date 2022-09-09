@@ -7,7 +7,7 @@ import threading
 from pystyle import Colors, Colorate , Write, Colors
 from colorama import Fore
 from pyotp import TOTP
-os.system(f'cls & mode 100,20 & title Jhook! Version 1.3!')
+os.system(f'cls & mode 100,20 & title Jhook! Version 1.4!')
 
 def main():
    menu()
@@ -128,7 +128,7 @@ def apis():
          break
       os.system('cls')
       Write.Print("Spam Ended", Colors.white_to_red, interval=0.01)
-      time.sleep(2)
+      time.sleep(5)
       os.system('cls')
       menu()     
 
