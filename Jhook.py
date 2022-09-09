@@ -43,6 +43,7 @@ Enter A Option ->""",Colors.white_to_red, interval=0.0)
    else:
          print("Enter The Right Option!")
          time.sleep(3)
+         os.system('cls')
          menu()
 
 
