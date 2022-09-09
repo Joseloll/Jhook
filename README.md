@@ -5,6 +5,7 @@
 - Fixed Minor Bugs
 - Added Info For Webhook
 - Added In Every Feature It Checks The Webhook So You Know If Your Getting A Valid Webhook Or Not
+- Made It Faster While Spamming The Discord Webhook
 # About This Project
 This is a multi discord webhook tool that can spams discord webhooks if they are protected or not
 
