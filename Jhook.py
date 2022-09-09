@@ -129,7 +129,7 @@ def apis():
          break
       os.system('cls')
       Write.Print("Spam Ended", Colors.white_to_red, interval=0.01)
-      time.sleep(5)
+      time.sleep(3)
       os.system('cls')
       menu()     
 
@@ -170,7 +170,7 @@ def spammer():
       break
    os.system('cls')
    Write.Print("Spam Ended", Colors.white_to_red, interval=0.01)
-   time.sleep(5)
+   time.sleep(3)
    os.system('cls')
    menu()
 
